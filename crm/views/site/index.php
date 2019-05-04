@@ -52,7 +52,180 @@ $this->title = 'День открытых дверей';
     <!-- PAGES
     ================================================== -->
 
-    
+    <!-- FEATURES
+    ================================================== -->
+    <section class="section bg-light" id="about">
+    <div class="prokrutka">
+        <div class="container">
+            <div class="row ">
+
+                <div class="col-lg-6 ">
+                    <div class="about-content">
+                        <h2 class="display-5">
+                        Что будет на мероприятии?
+                        </h2>
+                        <p>Регистрация</p>
+                        <ul class="list-unstyled skill-list ">
+                            <li>Вы получите сувениры нашего колледжа, а так же нашу газету и  буклеты.</li>
+                         </ul>
+
+                            <p>Официальная часть</p>
+                        
+                        <ul class="list-unstyled skill-list ">
+                        <li>речь директора колледжа</li>
+                        <li>презентация о направлениях и специальностях</li>
+                        <li>рассказ о студенческих мероприятиях, дополнительном образовании в колледже</li>
+                        <li>информация о подготовительных курсах</li>
+                        <li>презентация правил поступления и подачи документов.</li>
+                        </ul>
+
+                        <p>Экскурсия по колледжу</p>
+                        <ul class="list-unstyled skill-list ">
+                        <li>посещение аудиторий и лабороторий колледжа</li>
+                        <li>возможность самостоятельно попробывать свои силы в программировнии </li>
+                        <li>изучение структуры обучения .</li>
+                        </ul>
+                     </div>
+                       
+                </div>
+             </div>
+         </div>
+     </div>
+            <div class="container">
+                <div class="row ">
+                    <div class="col-lg-6">
+                        <h2 class="display-5">
+                        Выступят с речью
+                        </h2>
+</div>
+</div>
+                </div>
+            <div class="container">
+            <div class="row mt-5 align-items-center ">
+                <div class="col-lg-6 col-md-6">
+                    <div class="about-content-2 ">
+                    <div class="client-img">
+                    <img src="/web/img/3.jpg" alt="" class="img-fluid ">
+                         </div>
+                    </div>
+                </div>
+                
+
+                <div class="col-lg-6 col-md-6">
+                    <div class="about">
+                    <p>Горбунов Сергей Николаевич</p>
+                             <footer>Директор РКСИ</footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+            <div class="container">
+            <div class="row mt-5 align-items-center ">
+                <div class="col-lg-6 col-md-6">
+                    <div class="about-content-2 ">
+                    <div class="client-img">
+                    <img src="/web/img/2.jpg" alt="" class="img-fluid ">
+                         </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                    <div class="about">
+                    <p>Филиппенко Михаил Юрьевич</p>
+                             <footer>Зав. кафедрой программирования и компьютерных систем </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+
+
+        <div class="container">
+            <div class="row mt-5 align-items-center ">
+                <div class="col-lg-6 col-md-6">
+                    <div class="about-content-2 ">
+                    <div class="client-img">
+                                    <img src="/web/img/4.jpg" alt="" class="img-fluid ">
+                         </div>
+                       </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                    <div class="about">
+                    <p>Комова Ольга Валерьевна</p>
+                    <footer>Ответственный секретарь приемной комиссии. </footer>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center mb-0" >
+                            <a href="#form" target="_blank" class="btn btn-primary ">
+                               ЗАРЕГИСТИРОВАТЬСЯ
+                            </a>
+                        </p>
+        </div>
+    </section>
+
+
+    <section class="section" id="feature">
+        <div class="container">
+            <div class="row justify-content-center mb-4">
+                <div class="col-md-8 col-lg-6 text-center">
+
+                    <!-- Heading -->
+                    <h2 class="lg-title mb-2">
+                        Почему стоит поступать в РКСИ
+                    </h2>
+                </div>
+            </div>
+            <!-- / .row -->
+
+            <div class="row justy-content-center">
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center feature-block">
+                        <div class="feature-icon-block mb-4">
+                            <i class="fa fa-gem"></i>
+                        </div>
+                        <h4 class="mb-3 "></h4>
+                        <p>  Обучение студентов в авторизованных учебных центрах ведущих телекоммуникационных компаний:</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center feature-block">
+                        <div class="feature-icon-block mb-4">
+                            <i class="fa fa-anchor"></i>
+                        </div>
+                        <h4 class="mb-3"></h4>
+                        <p> Безлимитный доступ по двум выделенным высокоскоростным каналам к сети Интернет, бесплатный WI-FI в учебном корпусе колледжа.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center feature-block">
+                        <div class="feature-icon-block mb-4">
+                            <i class="fa fa-clock"></i>
+                        </div>
+                        <h4 class="mb-3"> </h4>
+                        <p>Стипендии Правительства РФ, Губернатора Ростовской области, предприятий IT-отрасли лучшим студентам.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="text-center feature-block">
+                        <div class="feature-icon-block mb-4">
+                            <i class="fa fa-dice"></i>
+                        </div>
+                        <h4 class="mb-3"></h4>
+                        <p>Проживание иногородних студентов в благоустроенных общежитиях в центре города</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- / .container -->
+    </section>
 
 
     <!-- ABOUT
