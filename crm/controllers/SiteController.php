@@ -3,19 +3,24 @@
 namespace app\controllers;
 
 use Yii;
-use yii\filters\AccessControl;
-use yii\web\Controller;
-use yii\web\Response;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
 use app\models\Abiturient;
-use app\models\Orientation;
+use app\models\Search;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
+use yii\models\Orientation;
 use yii\behaviors\TimeStampBehavior;
 use yii\db\ActiveRecord;
+use yii\filters\AccessControl;
+use app\models\LoginForm;
+use app\models\ContactForm;
 
+/**
+ * AbiturientController implements the CRUD actions for Abiturient model.
+ */
 class SiteController extends Controller
 {
+   // public $layout='basic';
     /**
      * {@inheritdoc}
      */
@@ -24,10 +29,13 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['view','index','login'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                    [
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -39,63 +47,124 @@ class SiteController extends Controller
                     'logout' => ['post'],
                 ],
             ],
-
-            'timestamp' => [
-                'class' => TimestampBehavior::className(),
-                'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => 'creation_time',
-                    ActiveRecord::EVENT_BEFORE_UPDATE => 'update_time',
-                ],
-                'value' => function() { return date('U'); },
-            ],
+           
         ];
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
-        ];
-    }
-
-   
-
-    /**
-     * Displays homepage.
-     *
-     * @return string
+     * Lists all Abiturient models.
+     * @return mixed
      */
     public function actionIndex()
     {
-        $model = new Abiturient();
+        $searchModel = new Search();
         
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            header("Refresh: 0");
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        }
-        $array = Orientation::getAll();
-
-        
         return $this->render('index', [
-            'model' => $model,
-            'array'=>$array,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Login action.
-     *
-     * @return Response|string
+     * Displays a single Abiturient model.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
      */
+    public function actionView($id)
+    {
+        $searchModel = new Search();
+        
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+            'searchModel' => $searchModel,
+        ]);
+    }
+
+    /**
+     * Creates a new Abiturient model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreate()
+    {
+        $model = new Abiturient();
+
+        if ($model->load(Yii::$app->request->post())) {
+           
+            if($model->validate()){
+                
+                if ($model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+            }
+        }
+        
+        return $this->render('create', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * Updates an existing Abiturient model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
+    }
+        public function actionStatic(){
+            return $this->render('static');
+        }
+    /**
+     * Deletes an existing Abiturient model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Finds the Abiturient model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Abiturient the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Abiturient::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+    }
+   
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+
+        return $this->redirect('index.php?r=site/index');
+    }
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
@@ -103,57 +172,15 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
+
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            
             return $this->goBack();
         }
-
         $model->password = '';
         return $this->render('login', [
             'model' => $model,
         ]);
     }
 
-    /**
-     * Logout action.
-     *
-     * @return Response
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
-
-    /**
-     * Displays contact page.
-     *
-     * @return Response|string
-      */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Displays about page.
-     *
-     * @return string
-     */
-    public function actionAbout()
-    {
-        
-        return $this->render('about');
-    }
-    public function actionHello(){
-        return $this->render('hello');
-    }
 }

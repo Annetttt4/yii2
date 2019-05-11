@@ -39,12 +39,13 @@ class Abiturient extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['surname', 'name', 'lastname', 'phone', 'email', 'klass', 'orientation', 'GPA', 'status', 'date'], 'required'],
+            [['email'], 'unique'],
+            [['surname', 'name', 'lastname', 'phone', 'klass', 'orientation', 'GPA', 'status', 'date'], 'required'],
             [['klass', 'orientation', 'status'], 'integer'],
             [['GPA'], 'number'],
-            [['date'], 'date','format' => 'd-M-yyyy'],
-            [['surname', 'name', 'lastname', 'email'], 'string', 'max' => 50],
-            [['phone'], 'string', 'max' => 25],
+          //  [['date'], 'date','format' => 'd-M-yyyy'],
+            [['surname', 'name', 'lastname', 'email'], 'string', 'max' => 255],
+            [['phone'], 'string', 'max' => 255],
             [['orientation'], 'exist', 'skipOnError' => true, 'targetClass' => Orientation::className(), 'targetAttribute' => ['orientation' => 'id']],
             [['status'], 'exist', 'skipOnError' => true, 'targetClass' => Status::className(), 'targetAttribute' => ['status' => 'id']],
         ];
@@ -92,5 +93,13 @@ class Abiturient extends \yii\db\ActiveRecord
     public function getSubDocs()
     {
         return $this->hasMany(SubDoc::className(), ['id_give' => 'id']);
+    }
+    public function getYear($date){
+        $rows = Abiturient::find()
+        ->select(['YEAR(date) as year'])
+    ->from('abiturient')
+    ->groupBy('year')
+    ->all();
+    return $rows;
     }
 }

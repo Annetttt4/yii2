@@ -48,9 +48,9 @@ class Search extends Abiturient
         $query = Abiturient::find();
         $query->joinWith(['orientation0']);
         $query->joinWith(['status0']);
-
+   
         // add conditions that should always apply here
-
+        
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
            
