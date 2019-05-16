@@ -49,7 +49,7 @@ echo Nav::widget([
         </div>
 
     </div>
-<?= Html::dropDownList('orientation', 'null',ArrayHelper::map(Orientation::find()->all(),'id','name'));?>
+
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
