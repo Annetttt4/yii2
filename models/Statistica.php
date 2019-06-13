@@ -37,5 +37,7 @@ class Statistica extends Abiturient{
     return $array;
        
     }
+
+
   
 }
